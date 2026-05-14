@@ -707,7 +707,7 @@ document.getElementById('closeSuccess').addEventListener('click',()=>document.ge
 document.getElementById('bizumConfirmBtn').addEventListener('click',async()=>{
   const btn=document.getElementById('bizumConfirmBtn');
   btn.disabled=true;
-  btn.innerHTML='<span class="spinner"></span> Enviando confirmaciones...';
+  btn.innerHTML='<span class="spinner"></span> Enviando tu reserva...';
   await new Promise(r=>setTimeout(r,1200));
   await enviarEmails();
   document.getElementById('successEmail').textContent=document.getElementById('emailInput').value;
