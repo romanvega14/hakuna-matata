@@ -76,6 +76,7 @@ body {
   background:
     linear-gradient(160deg, rgba(28,18,8,.75) 0%, rgba(74,124,47,.55) 100%),
     url('https://res.cloudinary.com/dy5gazx2z/image/upload/f_auto,q_auto/Screenshot_20260514-113416_f8igzm') center/contain no-repeat;
+  background-color: #1C1208;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center; padding: 80px 20px;
@@ -424,6 +425,11 @@ footer strong { color: var(--amarillo); }
 </head>
 <body>
 
+<!-- BANNER ÉXITO -->
+<div id="successBanner" style="display:none; position:fixed; top:0; left:0; right:0; z-index:9999; background:var(--verde2); color:#fff; text-align:center; padding:16px 20px; font-family:'Baloo 2',cursive; font-size:1.1rem; font-weight:700; box-shadow:0 4px 20px rgba(0,0,0,.2);">
+  🎊 ¡Reserva confirmada! Te hemos enviado un email con todos los detalles. ¡Nos vemos pronto! 🦁
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-leaves" id="leaves"></div>
@@ -711,8 +717,16 @@ document.getElementById('bizumConfirmBtn').addEventListener('click',async()=>{
   await new Promise(r=>setTimeout(r,1200));
   await enviarEmails();
   document.getElementById('successEmail').textContent=document.getElementById('emailInput').value;
-  document.getElementById('formState').classList.add('hidden');
-  document.getElementById('successState').classList.add('visible');
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.getElementById('successBanner').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    document.getElementById('successBanner').style.display = 'none';
+    document.getElementById('formState').classList.remove('hidden');
+    document.getElementById('successState').classList.remove('visible');
+    document.getElementById('bizumConfirmBtn').disabled = false;
+    document.getElementById('bizumConfirmBtn').innerHTML = '✅ Ya he enviado el Bizum';
+  }, 6000);
 });
 
 // ── DOBLE EMAIL ──────────────────────────
